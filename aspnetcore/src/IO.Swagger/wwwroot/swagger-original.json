@@ -1,0 +1,116 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "defaultTitle",
+    "description" : "defaultDescription",
+    "version" : "0.1"
+  },
+  "servers" : [ {
+    "url" : "https://enmapache.athtem.eei.ericsson.se"
+  } ],
+  "paths" : {
+    "/life-cycle-service/v1/enrichmentEvents/addAll" : {
+      "post" : {
+        "description" : "Open API Specification for Enrichment Event Rest",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "[{\"identifier\":\"is-1\",\"name\":\"a3\",\"description\":\"a2  description\",\"nodeName\":\"SPFRER60002\",\"startTime\":\"2020-08-19T13:34:00+00:00[Europe/Dublin]\",\"additionalAttributesMap\":{\"url\":\"www.google.com\"},\"type\":\"TROUBLE_TICKET\"\r\n,\"state\":\"OPEN\"}]"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Response for Enrichment Event",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\"message\":\"Enrichment Events saved successfully.1 Received\",\"errorList\":[]}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://enmapache.athtem.eei.ericsson.se"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://enmapache.athtem.eei.ericsson.se"
+      } ]
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "lifecycleservicev1enrichmentEventsaddAll_additionalAttributesMap" : {
+        "type" : "object",
+        "properties" : {
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body" : {
+        "required" : [ "description", "identifier", "name", "nodeName", "startTime", "type" ],
+        "type" : "object",
+        "properties" : {
+          "identifier" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "nodeName" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "startTime" : {
+            "type" : "string"
+          },
+          "endTime" : {
+            "type" : "string"
+          },
+          "additionalAttributesMap" : {
+            "$ref" : "#/components/schemas/lifecycleservicev1enrichmentEventsaddAll_additionalAttributesMap"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "errorList" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "message" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "errorList" : [ "errorList", "errorList" ],
+          "message" : "message"
+        }
+      }
+    }
+  }
+}
